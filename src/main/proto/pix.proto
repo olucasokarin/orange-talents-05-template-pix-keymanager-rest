@@ -1,10 +1,10 @@
 syntax = "proto3";
 
 option java_multiple_files = true;
-option java_package = "br.com.zup.edu.grpc";
+option java_package = "br.com.zupedu.grpc";
 option java_outer_classname = "PixServiceOuterClass";
 
-package br.com.zup.edu.grpc;
+package br.com.zupedu.grpc;
 
 import "google/protobuf/timestamp.proto";
 
