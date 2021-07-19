@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "br.com.zup.edu.grpc";
+option java_outer_classname = "PixServiceOuterClass";
+
+package br.com.zup.edu.grpc;
+
+import "google/protobuf/timestamp.proto";
+
+service PixService {
+  rpc register (RegisterPixRequest) returns (RegisterPixReply) {}
+}
+
+service RemovePixService {
+  rpc remove (RemovePixRequest) returns (RemovePixReply) {}
+}
+
+service RetrievePixService {
+  rpc retrieve (RetrievePixRequest) returns (RetrievePixReply) {}
+}
+
+service RetrieveAllPixService {
+  rpc retrieveAll (RetrieveListRequest) returns (RetrieveListReply) {}
+}
+
+enum TypeKey {
+  UNKNOWN_KEY = 0;
+  CPF = 1;
+  EMAIL = 2;
+  NUMBER_CELL = 3;
+  RANDOM_KEY = 4;
+}
+
+enum TypeAccount {
+  UNKNOWN_ACCOUNT = 0;
+  CHECKING_ACCOUNT = 1;
+  SAVINGS_ACCOUNT = 2;
+}
+
+message RegisterPixRequest {
+  string idClient = 1;
+  TypeKey typeKey = 2;
+  string valueKey = 3;
+  TypeAccount typeAccount = 4;
+}
+
+message RegisterPixReply {
+  string idClient = 1;
+  string idPix = 2;
+}
+
+message RemovePixRequest {
+    string idClient = 1;
+    string idPixKey = 2;
+}
+
+message RemovePixReply {
+  string status = 1;
+}
+
+message RetrievePixRequest {
+  oneof decide {
+    string valuePix = 1;
+    MessageInternal idPix = 2;
+  }
+
+  message MessageInternal {
+    string idClient = 1;
+    string idPix = 2;
+  }
+
+}
+
+message RetrievePixReply {
+  string idPix = 1;
+  string idClient = 2;
+  TypeKey typeKey = 3;
+  string valueKey = 4;
+  string OwnerName = 5;
+  string OwnerCPF = 6;
+  Institution institution = 7;
+  google.protobuf.Timestamp createdAt = 8;
+
+  message Institution {
+    string name = 1;
+    string branch = 2;
+    string numberAccount = 3;
+    TypeAccount typeAccount = 4;
+  }
+}
+
+message RetrieveListRequest {
+  string idClient = 1;
+}
+
+message RetrieveListReply {
+  message ListPix {
+    string idPix = 1;
+    TypeKey typeKey = 2;
+    string valueKey = 3;
+    TypeAccount typeAccount = 4;
+    google.protobuf.Timestamp createdAt = 5;
+  }
+
+  string idClient = 1;
+  repeated ListPix listPix = 2;
+}
