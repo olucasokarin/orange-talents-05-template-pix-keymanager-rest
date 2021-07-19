@@ -36,6 +36,9 @@ dependencies {
 
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 
+    implementation("io.micronaut.beanvalidation:micronaut-hibernate-validator")
+    implementation("org.hibernate:hibernate-validator:6.1.6.Final")
+
 }
 
 
