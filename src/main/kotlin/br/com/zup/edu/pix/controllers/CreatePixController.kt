@@ -44,19 +44,19 @@ class CreatePixController(
 @ValidPixKey
 data class PixKeyRequest(
     @field:NotBlank
-    val idClient: String,
+    val idClient: String?,
     @field:NotNull
-    val typeKey: TypeKey,
+    val typeKey: TypeKey?,
     @field:Size(max = 77)
     val valueKey: String?,
     @field:NotNull
-    val typeAccount: TypeAccount,
+    val typeAccount: TypeAccount?,
 ) {
     fun requestRestToRequestGrpc() =
         RegisterPixRequest.newBuilder()
             .setIdClient(idClient)
-            .setTypeKey(br.com.zupedu.grpc.TypeKey.valueOf(typeKey.name))
+            .setTypeKey(br.com.zupedu.grpc.TypeKey.valueOf(typeKey!!.name))
             .setValueKey(valueKey)
-            .setTypeAccount(br.com.zupedu.grpc.TypeAccount.valueOf(typeAccount.name))
+            .setTypeAccount(br.com.zupedu.grpc.TypeAccount.valueOf(typeAccount!!.name))
             .build()
 }
