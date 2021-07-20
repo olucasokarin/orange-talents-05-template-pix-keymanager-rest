@@ -20,9 +20,9 @@ class DeletePixController(
     fun remove(@PathVariable idClient: UUID?,
                @Valid @Body request: RemoveRequestRest?) : HttpResponse<Any> {
 
-        val removeResponse = removePixServiceGrpc.remove(createRequestRemovePix(request?.idPix, idClient))
+        removePixServiceGrpc.remove(createRequestRemovePix(request?.idPix, idClient))
 
-        return HttpResponse.ok(removeResponse.status)
+        return HttpResponse.ok()
     }
 }
 

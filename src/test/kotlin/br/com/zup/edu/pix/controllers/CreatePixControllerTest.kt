@@ -15,6 +15,7 @@ import io.micronaut.http.client.annotation.Client
 import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.mockito.BDDMockito.given
@@ -36,6 +37,11 @@ internal class CreatePixControllerTest {
     companion object {
         val CLIENT_ID = UUID.randomUUID()
         val PIX_ID = UUID.randomUUID()
+    }
+
+    @BeforeEach
+    internal fun setUp() {
+        Mockito.reset(registerPixService)
     }
 
     @Test
@@ -86,7 +92,7 @@ internal class CreatePixControllerTest {
 
     // errors handler grpc
 
-    /*@Test
+    @Test
     fun`should be validate exception unknown grpc`(){
         //scenario
         given(registerPixService.register(Mockito.any()))
@@ -102,7 +108,7 @@ internal class CreatePixControllerTest {
         with(assertThrows) {
             assertEquals(HttpStatus.BAD_REQUEST.code, status.code)
         }
-    }*/
+    }
 
     @Test
     fun`should be validate exception already exist grpc`(){
