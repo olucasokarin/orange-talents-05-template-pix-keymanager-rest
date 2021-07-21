@@ -2,6 +2,7 @@ package br.com.zup.edu.grpc
 
 import br.com.zupedu.grpc.PixServiceGrpc
 import br.com.zupedu.grpc.RemovePixServiceGrpc
+import br.com.zupedu.grpc.RetrieveAllPixServiceGrpc
 import br.com.zupedu.grpc.RetrievePixServiceGrpc
 import io.grpc.ManagedChannel
 import io.micronaut.context.annotation.Factory
@@ -19,4 +20,7 @@ class KeyManagerGrpcFactory(@GrpcChannel("keyPixGrpc") val channel: ManagedChann
 
     @Singleton
     fun retrievePixClient() = RetrievePixServiceGrpc.newBlockingStub(channel)
+
+    @Singleton
+    fun retrieveListPixClient() = RetrieveAllPixServiceGrpc.newBlockingStub(channel)
 }
