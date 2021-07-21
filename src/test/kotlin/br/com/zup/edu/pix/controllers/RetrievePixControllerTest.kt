@@ -53,8 +53,8 @@ internal class RetrievePixControllerTest {
             .thenReturn(createRetrieveResponseGrpc())
 
         //actions
-        val deleteRequestRest = HttpRequest.GET<Any>("/api/pix/${CLIENT_ID}/details/${PIX_ID}")
-        val responseRest = clientHttp.toBlocking().exchange(deleteRequestRest, Any::class.java)
+        val retrieveRequestRest = HttpRequest.GET<Any>("/api/pix/${CLIENT_ID}/details/${PIX_ID}")
+        val responseRest = clientHttp.toBlocking().exchange(retrieveRequestRest, Any::class.java)
 
         //assertions
         with(responseRest) {
@@ -70,9 +70,9 @@ internal class RetrievePixControllerTest {
             .willThrow(StatusRuntimeException(Status.NOT_FOUND))
 
         //actions
-        val deleteRequestRest = HttpRequest.GET<Any>("/api/pix/${CLIENT_ID}/details/${PIX_ID}")
+        val retrieveRequestRest = HttpRequest.GET<Any>("/api/pix/${CLIENT_ID}/details/${PIX_ID}")
         val assertThrows = assertThrows<HttpClientResponseException> {
-            clientHttp.toBlocking().exchange(deleteRequestRest, Any::class.java)
+            clientHttp.toBlocking().exchange(retrieveRequestRest, Any::class.java)
         }
 
         //assertions
@@ -88,9 +88,9 @@ internal class RetrievePixControllerTest {
             .willThrow(StatusRuntimeException(Status.UNKNOWN))
 
         //actions
-        val deleteRequestRest = HttpRequest.GET<Any>("/api/pix/${CLIENT_ID}/details/${PIX_ID}")
+        val retrieveRequestRest = HttpRequest.GET<Any>("/api/pix/${CLIENT_ID}/details/${PIX_ID}")
         val assertThrows = assertThrows<HttpClientResponseException> {
-            clientHttp.toBlocking().exchange(deleteRequestRest, Any::class.java)
+            clientHttp.toBlocking().exchange(retrieveRequestRest, Any::class.java)
         }
 
         //assertions
